@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>GAME</title>
+    <link rel="icon" type="imagem/png" href="esse.png" />
 </head>
 <body onload="desenharLabirinto()" style="padding: 0px;margin: 0px;">
-<canvas id="gameCanvas" width="700" height="600" style="background: #F0F0F0;"><img src="esse.png" id ="renan" /><img src="lucas_win.jpeg" id ="lucas_win" /><img src="lucas_lose.jpeg" id ="lucas_lose" /><img src="key.png" id="key"></canvas>
+<canvas id="gameCanvas" width="700" height="600" style="background: #F0F0F0;"><img src="esse.png" id ="renan" /><img src="renan_win.jpeg" id ="renan_win" /><img src="lucas_lose.jpeg" id ="lucas_lose" /><img src="key.png" id="key"></canvas>
 
 <script type="text/javascript">
     var iniciado = false;
@@ -242,7 +243,7 @@
         }
 
         if(win){
-            var img = document.getElementById("lucas_win");
+            var img = document.getElementById("renan_win");
             ctx.drawImage(img, 40, 0);
             iniciado=false;
         }
