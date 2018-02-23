@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GAME</title>
+</head>
+<body onload="desenharLabirinto()" style="padding: 0px;margin: 0px; background-color: #F8F8F8;">
+	<div style="background-color: #FFA000;">
+		<center>
+<canvas id="headerCanvas" width="300" height="100">
+	<script type="text/javascript">
+		var canvas = document.getElementById("headerCanvas");
+		var ctx = canvas.getContext("2d");
+		ctx.font="30px Comic Sans MS";
+		ctx.fillStyle = "#212121";
+		ctx.textAlign = "center";
+		ctx.fillText("Labirinto TAL game", 160, 60);
+		
+	</script>
+
+	</canvas>
+	</center>
+	<!--<img src="esse.png" style="float: left;" />-->
+</div>
+
+<div style="margin-left: 10%; margin-right: 10%; margin-top: 5%;">
+	<canvas id="gameTutorial" width="1200" height="500" >
+		<script type="text/javascript">
+		var canvas = document.getElementById("gameTutorial");
+		var ctx = canvas.getContext("2d");
+		ctx.moveTo(5, 50);
+		ctx.lineTo(5, 400);
+		ctx.lineWidth = 5;
+		ctx.stroke();
+		
+		ctx.beginPath();
+		ctx.arc(45,400,40,0.5*Math.PI,1*Math.PI);
+		ctx.stroke();
+		
+		ctx.moveTo(45, 440);
+		ctx.lineTo(1090, 440);
+		ctx.lineWidth = 5;
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(1090,400,40,0.01*Math.PI,0.5*Math.PI);
+		ctx.stroke();
+
+		ctx.moveTo(1130, 405);
+		ctx.lineTo(1130, 45);
+		ctx.lineWidth = 5;
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(1090,50,40,1.5*Math.PI,0*Math.PI);
+		ctx.stroke();
+
+		ctx.moveTo(1090, 10);
+		ctx.lineTo(42, 10);
+		ctx.lineWidth = 5;
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(45,50,40,1*Math.PI,1.5*Math.PI);
+		ctx.stroke();
+
+		ctx.font="50px Comic Sans MS";
+		ctx.fillStyle = "#212121";
+		ctx.textAlign = "center";
+		ctx.strokeText("Labirinto TAL game", 600, 90);
+
+		ctx.font="25px Comic Sans MS";
+		ctx.fillStyle = "#212121";
+		ctx.textAlign = "center";
+		ctx.fillText("Esse jogo foi feito utilzando apenas os métodos contidos no canvas.", 450,150);
+		ctx.fillText("Leve o TAL enrolado até a chave do laboratório 92.", 350,200);
+		ctx.fillText("Não toque nas bordas do labirinto!", 250,250);
+		ctx.fillText("Não deixe o BAD LUCAS aparecer em sua tela!", 320,300);
+		ctx.fillText("Boa sorte galera!", 145,350);
+	</script>
+	</canvas>
+	
+</div>
+<center><a href="game.html"><img src="iniciar.png" id="iniciar"/></a></center>
+<br>
+<br>
+
+</body>
+</html>

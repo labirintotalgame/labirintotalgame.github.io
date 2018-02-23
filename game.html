@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GAME</title>
+</head>
+<body onload="desenharLabirinto()" style="padding: 0px;margin: 0px;">
+<canvas id="gameCanvas" width="700" height="600" style="background: #F0F0F0;"><img src="esse.png" id ="renan" /><img src="lucas_win.jpeg" id ="lucas_win" /><img src="lucas_lose.jpeg" id ="lucas_lose" /><img src="key.png" id="key"></canvas>
+
+<script type="text/javascript">
+    var iniciado = false;
+    var canvas = document.getElementById("gameCanvas");
+    var ctx = canvas.getContext("2d");
+    var obstaculosX = [];
+    var obstaculosY = [];
+    var obstaculosW = [];
+    var obstaculosH = [];
+    var count = 0;
+    function criarObjeto(x, y, w, h){
+        obstaculosX[count] = x;
+        obstaculosY[count] = y;
+        obstaculosH[count] = h;
+        obstaculosW[count] = w;
+        ctx.fillStyle = "#FF0000";
+        ctx.fillRect(x,y,w,h);
+        count++;
+    }
+    
+    
+    function desenharLabirinto(){
+        canvas.addEventListener("mousemove", setMousePosition, false);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(0,0,700,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(675,25,25,700);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(0,575,625,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(0,25,25,650);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(0,120,150,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(0,200,200,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(100,200,25,150);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(100,350,80,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(0,470,350,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(100,350,80,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(220,25,25,60);
+
+        //ctx.fillStyle = "#FF0000";
+        //criarObjeto(220,85,85,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(420,25,25,150);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(420,75,175,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(595,75,25,160);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(300,300,400,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(420,325,25,120);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(420,445,175,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(415,530,100,25);
+
+        ctx.fillStyle = "#FF0000";
+        criarObjeto(515,530,25,75);
+
+        var img = document.getElementById("renan");
+        ctx.drawImage(renan,30,30);
+        ctx.beginPath();
+
+        var imgKey = document.getElementById("key");
+        ctx.drawImage(imgKey,630,550);
+        ctx.beginPath();
+        
+        //ctx.arc(650,574,20,0,2*Math.PI);
+        //ctx.fillStyle="FF0000";
+        //ctx.fill();
+
+    }
+
+    function getPosition(el) {
+      var xPosition = 0;
+      var yPosition = 0;
+     
+      while (el) {
+        xPosition += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+        yPosition += (el.offsetTop - el.scrollTop + el.clientTop);
+        el = el.offsetParent;
+      }
+      return {
+        x: xPosition,
+        y: yPosition
+      };
+    }       
+    var oldX = 30;
+    var oldY=30;
+    var canvasPos = getPosition(canvas);
+    var mouseX = 0;
+    var mouseY = 0;
+    function setMousePosition(e) {
+      mouseX = e.clientX - 20;
+      mouseY = e.clientY - 20;
+      console.log(mouseX);
+      if(iniciado){
+        ctx.clearRect(oldX, oldY, 40, 40);
+        oldX = mouseX;
+        oldY = mouseY;
+         var img = document.getElementById("renan");
+        ctx.drawImage(img, mouseX, mouseY);
+        
+        for (var i = 0; i<count; i++){
+            verificarColisao(i, mouseX, mouseY);
+        }
+        }else{
+            if((mouseY>=10 && mouseY<=50) && (mouseX>= 25 && mouseX<=45)){
+                iniciado = true;
+            }
+        }
+    }
+    function verificarColisao(index, mouseX, mouseY){
+        
+        mouseX = mouseX;
+        mouseY = mouseY;    
+        var myleft = mouseX;
+        var myright = mouseX + 40;
+        var mytop = mouseY;
+        var mybottom = mouseY +40;
+        var otherleft = obstaculosX[index];
+        var otherright = obstaculosX[index] + (obstaculosW[index]);
+        var othertop = obstaculosY[index];
+        var otherbottom = obstaculosY[index] + (obstaculosH[index]);
+
+        var crash = false;
+        var somaObj =obstaculosX[index] +  obstaculosW[index];
+        var somaObj2 = obstaculosY[index] +  obstaculosH[index];
+
+        var crash2 = "";
+        if(mouseX>=obstaculosX[index] && mouseX<=somaObj){
+            if(mouseY>=obstaculosY[index] && mouseY<=somaObj2){
+                crash2= "1"
+                crash = true;
+            }
+        }
+        mouseY = mouseY;
+        var somMouseX = mouseX+40;
+        if(somMouseX>=obstaculosX[index] && somMouseX<=somaObj){
+            if(mouseY>=obstaculosY[index] && mouseY<=somaObj2){
+                crash2 = "2";
+                crash = true;
+            }   
+        }
+
+
+        var somMouseX = mouseX+40;
+        if(somMouseX>=obstaculosX[index] && somMouseX<=somaObj){
+            if(mouseY>=obstaculosY[index] && mouseY<=somaObj2){
+                crash2 = "3";
+                crash = true;
+            }   
+        }
+
+        var somMouseX = mouseX+40;
+        var somMouseY = mouseY+40;
+        if(somMouseX>=obstaculosX[index] && somMouseX<=somaObj){
+            if(somMouseY>=obstaculosY[index] && somMouseY<=somaObj2){
+                crash2 = "4";
+                crash = true;
+            }   
+        }
+
+        var soma1 = obstaculosY[index] + obstaculosH[index];
+        var somaM = mouseY + 40;
+        var somaMx = mouseX + 40;
+        var soma2 = obstaculosX[index] + obstaculosW[index];
+        if(somaM >= obstaculosY[index] && somaM<= soma1){
+            if(somaMx>=obstaculosX[index] && somaMx<=soma2){
+                crash2 = "5";
+                crash = true;
+            }
+        }
+
+        var somaX6 = obstaculosX[index] + obstaculosW[index];
+        var somaY6 = obstaculosY[index] + obstaculosH[index];
+        var somaMx6 = mouseX+40;
+        var somaMy6 = mouseY+40;
+        if(obstaculosX[index] == 300){
+        console.log("SomaX6: " + somaX6);
+        console.log("SomaY6: " + somaY6);
+        console.log("somaMx6: " + somaMx6);
+        console.log("somaMy6: " + somaMy6);
+        console.log("mouseX: " + mouseX);
+        console.log("mouseY: " + mouseY);
+        console.log("obstaculosY: " + obstaculosY[index]);  
+        }
+
+        //if(mouseY>=1)
+        var somMouseX = mouseX+40;
+        if(somMouseX>=obstaculosX[index] && somMouseX<=somaObj){
+            if(mouseY>=obstaculosY[index] && mouseY<=somaObj2){
+                crash2 = "2";
+                crash = true;
+            }   
+        }
+        var win = false
+        if(mouseY>520 && mouseX>620){
+            win = true;
+        }
+
+        
+
+        
+        if(crash)
+        {
+            var img = document.getElementById("lucas_lose");
+            ctx.drawImage(img, 40, 0);
+            iniciado=false;
+        }
+
+        if(win){
+            var img = document.getElementById("lucas_win");
+            ctx.drawImage(img, 40, 0);
+            iniciado=false;
+        }
+        return crash;
+    } 
+
+</script>
+
+</body>
+</html>
